@@ -1,0 +1,45 @@
+/* SignIn.css */
+.signin-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.form-container {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  min-width: 400px;
+  width: 100%;
+}
+
+.signin-button {
+  background-color: #333;
+  border: none;
+}
+
+.signin-button:hover {
+  background-color: #555;
+}
+
+.social-login {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.social-icons i {
+  font-size: 20px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.illustration {
+  width: 600px;
+  height: 600px;
+  background: url("/src/assets/bg.png") no-repeat center;
+  background-size: contain;
+}
+

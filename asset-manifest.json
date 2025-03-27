@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/timesworld/static/css/main.6b7785b4.css",
+    "main.js": "/timesworld/static/js/main.6c103f07.js",
+    "static/js/453.32dcb41c.chunk.js": "/timesworld/static/js/453.32dcb41c.chunk.js",
+    "static/media/fa-solid-900.ttf": "/timesworld/static/media/fa-solid-900.2582b0e4bcf85eceead0.ttf",
+    "static/media/fa-brands-400.ttf": "/timesworld/static/media/fa-brands-400.1815e00441357e01619e.ttf",
+    "static/media/fa-solid-900.woff2": "/timesworld/static/media/fa-solid-900.2463b90d9a316e4e5294.woff2",
+    "static/media/fa-brands-400.woff2": "/timesworld/static/media/fa-brands-400.c210719e60948b211a12.woff2",
+    "static/media/fa-regular-400.ttf": "/timesworld/static/media/fa-regular-400.914997e1bdfc990d0897.ttf",
+    "static/media/fa-regular-400.woff2": "/timesworld/static/media/fa-regular-400.89999bdf5d835c012025.woff2",
+    "static/media/bg.png": "/timesworld/static/media/bg.f01f7960c8ca349a8c43.png",
+    "static/media/fa-v4compatibility.ttf": "/timesworld/static/media/fa-v4compatibility.da94ef451f4969af06e6.ttf",
+    "static/media/fa-v4compatibility.woff2": "/timesworld/static/media/fa-v4compatibility.ea8f94e1d22e0d35ccd4.woff2",
+    "index.html": "/timesworld/index.html",
+    "main.6b7785b4.css.map": "/timesworld/static/css/main.6b7785b4.css.map",
+    "main.6c103f07.js.map": "/timesworld/static/js/main.6c103f07.js.map",
+    "453.32dcb41c.chunk.js.map": "/timesworld/static/js/453.32dcb41c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6b7785b4.css",
+    "static/js/main.6c103f07.js"
+  ]
+}

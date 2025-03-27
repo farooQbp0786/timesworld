@@ -1,14 +1,19 @@
 import React from "react";
 import { Provider } from "react-redux";
 import store from "./store/store";
-import Login from "./pages/login";
-import HomePage from "./pages/home";
+import { BrowserRouter } from "react-router-dom";
+import AuthProvider from "./services/authproviders";
+import AppRouter from "./services/routes";
 
 function App() {
   return (
-    <Provider store={store}>
-      <HomePage />
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <AuthProvider>
+          <AppRouter />
+        </AuthProvider>
+      </Provider>
+    </BrowserRouter>
   );
 }
 

@@ -1,0 +1,54 @@
+.imageslider-container {
+    margin: auto;
+    text-align: center;
+    position: relative;
+  }
+  
+  .imageslider-image {
+    border-radius: 0px;
+    height: 400px;
+    object-fit: cover;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+  }
+  
+  /* Custom Bottom Navigation */
+  .imageslider-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 15px;
+  }
+  
+  .imagearrow-icon {
+    font-size: 20px;
+    cursor: pointer;
+    color: black;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .imagearrow-icon:hover {
+    transform: scale(1.2);
+  }
+  
+  /* Pagination Dots */
+  .imagecustom-pagination {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .imagedot {
+    width: 10px;
+    height: 10px;
+    background-color: lightgray;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .imagedot.active {
+    background-color: black;
+  }
+  

@@ -1,52 +1,18 @@
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form } from "react-bootstrap";
 import "./styles.css";
-import { login } from "../../store/authSlice";
+import { loginValue } from "../../store/authSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import SocialLogin from "../../components/sociallogin";
-
-const TextInput = ({ type, placeholder }) => (
-  <Form.Control
-    type={type}
-    placeholder={placeholder}
-    className="border border-dark shadow-none p-2 my-2"
-    style={{
-      fontSize: "1rem",
-      fontWeight: "bold",
-      borderRadius: 0,
-      borderWidth: 3,
-    }}
-  />
-);
-
-const Checkbox = ({ label }) => (
-  <Form.Group className="d-flex align-content-center my-1">
-    <Form.Check
-      type="checkbox"
-      onChange={(e) => {
-        e.target.style.backgroundColor = e.target.checked ? "black" : "white";
-        e.target.style.backgroundImage = e.target.checked
-          ? 'url(\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="white" d="M20.285 6.321l-1.412-1.414-9.151 9.154-4.24-4.242-1.415 1.414 5.655 5.657z"/></svg>\')'
-          : "none";
-        e.target.style.backgroundSize = "contain";
-        e.target.style.backgroundPosition = "center";
-        e.target.style.backgroundRepeat = "no-repeat";
-        e.target.style.boxShadow = "none";
-        e.target.style.border = "1px solid black";
-        e.target.style.borderRadius = 0;
-      }}
-    />
-    <Form.Label
-      className="fw-bold"
-      style={{ fontSize: "1rem", color: "black" }}
-    >
-      &nbsp;&nbsp;{label}
-    </Form.Label>
-  </Form.Group>
-);
+import CustomButton from "../../components/button";
+import TextInput from "../../components/textinput";
+import Checkbox from "../../components/checkbox";
+import { useAuth } from "../../services/authproviders";
+import { REGEX } from "../../constants/constants";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const { login } = useAuth()
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
@@ -55,7 +21,13 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login(credentials));
+    if (Object.values(credentials).some((item) => item === '')) return alert('Username or Password must not be empty!');
+    if (REGEX.PASSWORD.test(credentials.password)) {
+        dispatch(loginValue(credentials));
+        login(credentials.email)
+    } else {
+        alert('Invalid Username or Password')
+    }
   };
   return (
     <Container
@@ -76,15 +48,10 @@ const Login = () => {
               </a>
             </p>
             <Form>
-              <TextInput type="text" placeholder="Username or email" />
-              <TextInput type="password" placeholder="Password" />
+              <TextInput type="text" placeholder="Username or email" value={credentials.email} name='email' onChange={handleChange} />
+              <TextInput type="password" placeholder="Password"  value={credentials.password} name='password' onChange={handleChange} />
               <Checkbox label="Keep me signed in" />
-              <Button
-                className="w-100 mt-1"
-                style={{ backgroundColor: "#333", borderColor: "#333", borderRadius: 0 }}
-              >
-                Sign In
-              </Button>
+              <CustomButton label="Sign In" onClick={handleSubmit} className='w-100 mt-1' />
             </Form>
             <div className="text-center social-login text-dark">
               <p className="mt-3">Or Sign In With</p>

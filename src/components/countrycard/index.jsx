@@ -2,7 +2,7 @@ import React from 'react'
 import { Card } from 'react-bootstrap';
 
 const CountryCard = ({ name, region, flag }) => (
-    <Card className="p-1 mb-3 border-2 border-dark" style={{ borderRadius: 0 }}>
+    <Card className="p-1 mb-3 border-2 border-dark" style={{ width: "100%", borderRadius: 0, boxShadow: "5px 5px 2px rgba(0, 0, 0, 0.4)", }}>
       <Card.Body className="d-flex align-items-center">
         <img src={flag} alt={name} style={{ width: 100, height: 60, objectFit: 'cover', marginRight: 10 }} />
         <div>

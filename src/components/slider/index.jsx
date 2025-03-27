@@ -1,19 +1,17 @@
-import React from 'react'
-import { Carousel } from 'react-bootstrap';
+import React from "react";
+import "./styles.css";
 
-const ImageSlider = () => (
-  <Carousel indicators={false} controls={true}>
-    <Carousel.Item>
-      <div className="bg-light d-flex align-items-center justify-content-center" style={{ height: 200 }}>
-        <span className="text-muted">Image 1</span>
-      </div>
-    </Carousel.Item>
-    <Carousel.Item>
-      <div className="bg-light d-flex align-items-center justify-content-center" style={{ height: 200 }}>
-        <span className="text-muted">Image 2</span>
-      </div>
-    </Carousel.Item>
-  </Carousel>
-);
+const Slider = ({ image }) => {
 
-export default ImageSlider
+  return (
+    <div className="position-relative slider-container w-100">
+      <img
+        className="d-block w-100 slider-image"
+        src={image}
+        alt={`Slide ${image}`}
+      />
+    </div>
+  );
+};
+
+export default Slider;

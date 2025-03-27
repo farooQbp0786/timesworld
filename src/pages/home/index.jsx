@@ -1,78 +1,70 @@
 import { useState, useEffect } from "react";
 import "./styles.css";
-import { Container, Row, Col, Button, Nav } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import CountryCard from "../../components/countrycard";
-import ImageSlider from "../../components/slider";
+import ImageSlider from "../../components/imageslider";
 import SocialLogin from "../../components/sociallogin";
-
-const FilterTabs = ({ setRegion }) => (
-  <Nav
-    className="justify-content-end mb-3"
-    variant="underline"
-    defaultActiveKey="all"
-  >
-    <Nav.Item>
-      <Nav.Link
-        eventKey="all"
-        className="text-dark fw-bold"
-        onClick={() => setRegion("all")}
-      >
-        All
-      </Nav.Link>
-    </Nav.Item>
-    <Nav.Item>
-      <Nav.Link
-        eventKey="asia"
-        className="text-dark"
-        onClick={() => setRegion("Asia")}
-      >
-        Asia
-      </Nav.Link>
-    </Nav.Item>
-    <Nav.Item>
-      <Nav.Link
-        eventKey="europe"
-        className="text-dark"
-        onClick={() => setRegion("Europe")}
-      >
-        Europe
-      </Nav.Link>
-    </Nav.Item>
-  </Nav>
-);
+import CustomButton from "../../components/button";
+import FloatingButton from "../../components/floatingbutton";
+import { useDispatch, useSelector } from "react-redux";
+import { getCountryList } from "../../services/api";
+import FilterTabs from "../../components/filtertabs";
+import Slider from "../../components/slider";
 
 export default function HomePage() {
-  const [countries, setCountries] = useState([]);
+  const dispatch = useDispatch();
+  const { countryList, sliderImages } = useSelector((state) => state.auth);
   const [region, setRegion] = useState("all");
   const [visible, setVisible] = useState(10);
 
   useEffect(() => {
-    fetch("https://restcountries.com/v2/all?fields=name,region,flag")
-      .then((response) => response.json())
-      .then((data) => setCountries(data));
+    dispatch(getCountryList());
   }, []);
 
   const filteredCountries =
-    region === "all" ? countries : countries.filter((c) => c.region === region);
+    region === "all"
+      ? countryList
+      : countryList.filter((c) => c.region === region) ?? [];
 
+  const images = [
+    "https://via.placeholder.com/400x200",
+    "https://via.placeholder.com/400x200/ff7f7f",
+    "https://via.placeholder.com/400x200/77dd77",
+    "https://via.placeholder.com/400x200/779ecb",
+  ];
   return (
-    <Container className="py-4">
-      <Row className="mb-3">
+    <Container className="py-4 mt-4">
+      <Row>
+        <Col xs={9}>
+          <h2 className="fw-light-bold text-left">Countries</h2>
+        </Col>
         <Col>
-          <h2 className="fw-bold text-center">WELCOME</h2>
+          <FilterTabs setRegion={setRegion} />
         </Col>
       </Row>
-      <FilterTabs setRegion={setRegion} />
       <Row>
-        <Col md={8}>
-          <ImageSlider />
+        <Col xs={12} md={4} className="position-relative">
+          <div className="position-absolute top-0 start-0 end-0 border border-top-4 border-dark mx-2" />
         </Col>
-        <Col md={4}>
-          <ImageSlider />
+        <Col>
+          <h1 className="fw-bold text-center" style={{ fontSize: "4rem" }}>
+            WELCOME
+          </h1>
+        </Col>
+        <Col xs={12} md={4} className="position-relative">
+          <div className="position-absolute bottom-0 start-0 end-0 border border-bottom-4 border-dark mx-2" />
         </Col>
       </Row>
       <Row className="mt-4">
-        {filteredCountries.slice(0, visible).map((country, index) => (
+        <Col md={4} className="order-1 order-md-2">
+          <Slider image={(sliderImages?.length && sliderImages[5]) ?? ''} />
+        </Col>
+        <Col md={8}  className="order-2 order-md-1 mt-2 mt-md-0">
+        <ImageSlider images={sliderImages ?? []} />
+        </Col>
+      </Row>
+      <Row className="mt-4">
+        {filteredCountries?.slice(0, visible).map((country, index) => (
           <Col md={6} key={index}>
             <CountryCard
               name={country.name}
@@ -82,14 +74,24 @@ export default function HomePage() {
           </Col>
         ))}
       </Row>
-      {visible < filteredCountries.length && (
+      {visible < filteredCountries?.length && (
         <div className="text-center mt-3">
-          <Button variant="dark" onClick={() => setVisible(visible + 10)}>
-            Load more
-          </Button>
+          <CustomButton
+            label="Load more"
+            onClick={() => setVisible(visible + 10)}
+          />
         </div>
       )}
+      <br />
       <SocialLogin />
+      <Row className="justify-content-center mt-5">
+        <h6 className="text-center">
+          Example@email.com
+          <br />
+          Copyright &copy; 2020 Name. All rights reserved.
+        </h6>
+      </Row>
+      <FloatingButton />
     </Container>
   );
 }
